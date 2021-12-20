@@ -3,9 +3,9 @@ include_once("Conexion.php");
 
 class RolPrivilegio extends Conexion 
 {
-    public function RolPrivilegio()
+    public function __construct()
     {
-        $this->conectarDB();
+        parent::__construct();
     }
 
     public function obtenerPrivilegios($idRol)

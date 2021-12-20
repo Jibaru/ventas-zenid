@@ -3,9 +3,9 @@ include_once("Conexion.php");
 
 class UsuarioPrivilegio extends Conexion 
 {
-    public function UsuarioPrivilegio()
+    public function __construct()
     {
-        $this->conectarDB();
+        parent::__construct();
     }
 
     public function obtenerPrivilegios($idUsuario)

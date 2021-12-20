@@ -3,9 +3,9 @@ include_once("Conexion.php");
 
 class Usuario extends Conexion 
 {
-    public function Usuario()
+    public function __construct()
     {
-        $this->conectarDB();
+        parent::__construct();
     }
 
     public function validarUsuario($correoElectronico, $contrasenia)

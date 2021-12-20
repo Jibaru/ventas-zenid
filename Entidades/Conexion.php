@@ -2,19 +2,19 @@
 
 class Conexion
 {
-    protected $host = "localhost";
-    protected $nombre_bd = "zenid_bd";
-    protected $usuario = "root";
-    protected $contrasenia = "root";
+    protected $host;
+    protected $nombre_bd;
+    protected $usuario;
+    protected $contrasenia;
     protected $conexion;
 
-    public function Conexion()
+    public function __construct()
     {
         $env = getenv();
-        $host = $env["ZENID_ADS_HOST"];
-        $nombre_bd = $env["ZENID_ADS_BD_NAME"];
-        $usuario = $env["ZENID_SCRUM_BD_USER"];
-        $contrasenia = $env["ZENID_SCRUM_BD_PASSWORD"];
+        $this->host = $env["ZENID_ADS_HOST"];
+        $this->nombre_bd = $env["ZENID_ADS_BD_NAME"];
+        $this->usuario = $env["ZENID_SCRUM_BD_USER"];
+        $this->contrasenia = $env["ZENID_SCRUM_BD_PASSWORD"];
     }
 
     protected function conectarDB()
