@@ -3,11 +3,6 @@ include_once("Conexion.php");
 
 class Rol extends Conexion 
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function obtenerRol($idRol)
     {
         $this->conectarDB();

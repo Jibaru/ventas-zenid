@@ -3,10 +3,6 @@ include_once("Conexion.php");
 
 class Usuario extends Conexion 
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     public function validarUsuario($correoElectronico, $contrasenia)
     {
