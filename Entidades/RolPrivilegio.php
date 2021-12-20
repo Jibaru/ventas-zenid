@@ -29,6 +29,17 @@ class RolPrivilegio extends Conexion
         return ($fila);
     }
 
+    public function crearRolPrivilegio($idRol, $idPrivilegio)
+    {
+        $this->conectarDB();
+        $sql = "INSERT INTO roles_privilegios(id_rol, id_privilegio) 
+                VALUES ('$idRol', '$idPrivilegio')";
+        $this->conexion->query($sql);
+        $idRolPrivilegio = mysqli_insert_id($this->conexion);
+        $this->desconectarDB();
+        return $idRolPrivilegio;
+    }
+
 }
 
 ?>
