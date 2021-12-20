@@ -8,18 +8,23 @@ class Conexion
     protected $contrasenia = "root";
     protected $conexion;
 
-    /*public Conexion()
+    public function Conexion()
     {
         $env = getenv();
         $host = $env["ZENID_ADS_HOST"];
         $nombre_bd = $env["ZENID_ADS_BD_NAME"];
         $usuario = $env["ZENID_SCRUM_BD_USER"];
         $contrasenia = $env["ZENID_SCRUM_BD_PASSWORD"];
-    }*/
+    }
 
     protected function conectarDB()
     {
-        $this->conexion = mysqli_connect("localhost", "root", "root", "zenid_bd");
+        $this->conexion = mysqli_connect(
+            $this->host, 
+            $this->usuario, 
+            $this->contrasenia, 
+            $this->nombre_bd
+        );
     }
 
     protected function desconectarDB()
