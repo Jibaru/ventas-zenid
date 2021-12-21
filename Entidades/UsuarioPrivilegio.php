@@ -21,11 +21,32 @@ class UsuarioPrivilegio extends Conexion
         $numFilas = mysqli_num_rows($resultado);
         $this->desconectarDB();
         
+        $fila = array();
         for ($i = 0; $i < $numFilas; $i++) {
             $fila[$i] = $resultado->fetch_array();
         }
             
         return ($fila);
+    }
+
+    public function crearUsuarioPrivilegio($idUsuario, $idPrivilegio)
+    {
+        $this->conectarDB();
+        $sql = "INSERT INTO usuarios_privilegios(id_usuario, id_privilegio) 
+                VALUES ('$idUsuario', '$idPrivilegio')";
+        $this->conexion->query($sql);
+        $idUsuarioPrivilegio = mysqli_insert_id($this->conexion);
+        $this->desconectarDB();
+        return $idUsuarioPrivilegio;
+    }
+
+    public function eliminarUsuarioPrivilegio($idUsuario)
+    {
+        $this->conectarDB();
+        $sql = "DELETE FROM usuarios_privilegios WHERE 
+                id_usuario = '$idUsuario'";
+        $this->conexion->query($sql);
+        $this->desconectarDB();
     }
 
 }
