@@ -48,17 +48,21 @@ class FormGestionarRoles
                                     <td><?php echo $rol["id_rol"] ?></td>
                                     <td><?php echo $rol["nombre"] ?></td>
                                     <td class="text-end">
-                                        <a href="formulario-rol?idRol=<?php echo $rol["id_rol"] ?>"
-                                            class="btn btn-warning">
-                                            Editar
-                                        </a>
-                                        <a href="inhabilitar-rol?idRol=<?php echo $rol["id_rol"] ?>"
-                                            class="btn btn-danger">
-                                            Inhabilitar
-                                        </a>
-                                        <a href="habilitar-rol?idRol=<?php echo $rol["id_rol"] ?>" class="btn btn-dark">
-                                            Habilitar
-                                        </a>
+                                        <form action="GetFormEditarRol.php" method="GET" class="d-inline">
+                                            <input type="hidden" name="id-rol" value="<?php echo $rol["id_rol"] ?>">
+                                            <button name="boton" class="btn btn-warning">
+                                                Editar
+                                            </button>
+                                        </form>
+                                        <form action="PostHabilitarRol.php" method="POST" class="d-inline">
+                                            <input type="hidden" name="id-rol" value="<?php echo $rol["id_rol"] ?>">
+                                            <input type="hidden" name="valor"
+                                                value="<?php echo ($rol["habilitado"] == '0' ? '1' : '0') ?>">
+                                            <button name="boton"
+                                                class="btn btn-<?php echo ($rol["habilitado"] == '0' ? 'success' : 'danger') ?>">
+                                                <?php echo ($rol["habilitado"] == '0' ? 'Habilitar' : 'Inhabilitar') ?>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                                 <?php } ?>

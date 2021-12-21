@@ -40,6 +40,45 @@ class Rol extends Conexion
         $this->desconectarDB();
         return $idRol;
     }
+
+    public function modificarRol(
+        $idRol,
+        $nombre
+    )
+    {
+        $this->conectarDB();
+        $sql = "UPDATE roles
+                SET nombre = '$nombre'
+                WHERE id_rol = '$idRol'";
+        $this->conexion->query($sql);
+        $this->desconectarDB();
+    }
+
+    public function verificarDatosModificar($nombre, $idRol)
+    {
+        $this->conectarDB();
+        $sql = "SELECT * FROM roles WHERE 
+                (nombre = '$nombre') AND id_rol != '$idRol'";
+        $resultado = $this->conexion->query($sql);
+        $numFilas = mysqli_num_rows($resultado);
+        $this->desconectarDB();
+        
+        if ($numFilas >= 1) {
+            return 0;
+        }
+
+        return 1;
+    }
+
+    public function habilitar($idRol, $valor)
+    {
+        $this->conectarDB();
+        $sql = "UPDATE roles
+                SET habilitado = '$valor' 
+                WHERE id_rol = '$idRol'";
+        $this->conexion->query($sql);
+        $this->desconectarDB();
+    }
 }
 
 ?>

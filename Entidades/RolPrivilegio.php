@@ -40,6 +40,15 @@ class RolPrivilegio extends Conexion
         return $idRolPrivilegio;
     }
 
+    public function eliminarRolPrivilegio($idRol)
+    {
+        $this->conectarDB();
+        $sql = "DELETE FROM roles_privilegios WHERE 
+                id_rol = '$idRol'";
+        $this->conexion->query($sql);
+        $this->desconectarDB();
+    }
+
 }
 
 ?>
