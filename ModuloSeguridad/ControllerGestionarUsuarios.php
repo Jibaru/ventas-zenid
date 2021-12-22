@@ -59,7 +59,7 @@ class ControllerGestionarUsuarios
             $formulario = new FormMensajeSistema;
             $formulario->formMensajeSistemaRutaShow(
                 "Usuario creado satisfactoriamente", 
-                "GetGestionarUsuarios.php");
+                "GetFormGestionarUsuarios.php");
             
         }
     }
@@ -76,7 +76,7 @@ class ControllerGestionarUsuarios
             $formulario = new FormMensajeSistema;
             $formulario->formMensajeSistemaRutaShow(
                 "No se encontraron coincidencias", 
-                "GetGestionarUsuarios.php");
+                "GetFormGestionarUsuarios.php");
         } 
         else 
         {
@@ -98,7 +98,7 @@ class ControllerGestionarUsuarios
             $formulario = new FormMensajeSistema;
             $formulario->formMensajeSistemaRutaShow(
                 "Usuario no existe", 
-                "GetGestionarUsuarios.php");
+                "GetFormGestionarUsuarios.php");
         } 
         else
         {
@@ -170,7 +170,7 @@ class ControllerGestionarUsuarios
             $formulario = new FormMensajeSistema;
             $formulario->formMensajeSistemaRutaShow(
                 "Usuario modificado satisfactoriamente", 
-                "GetGestionarUsuarios.php");
+                "GetFormGestionarUsuarios.php");
             
         }
     }
@@ -185,7 +185,7 @@ class ControllerGestionarUsuarios
             $formulario = new FormMensajeSistema;
             $formulario->formMensajeSistemaRutaShow(
                 "Usuario habilitado/deshabilitado", 
-                "GetGestionarUsuarios.php");
+                "GetFormGestionarUsuarios.php");
         
     }
 }

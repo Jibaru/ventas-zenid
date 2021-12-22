@@ -71,7 +71,7 @@ class FormGestionarUsuarios
                                     <td><?php echo $usuario["dni"] ?></td>
                                     <td><?php echo $usuario["telefono"] ?></td>
                                     <td class="text-end">
-                                        <form action="GetEditarUsuario.php" method="GET" class="d-inline">
+                                        <form action="GetFormEditarUsuario.php" method="GET" class="d-inline">
                                             <input type="hidden" name="id-usuario"
                                                 value="<?php echo $usuario["id_usuario"] ?>">
                                             <button name="boton" class="btn btn-warning">
