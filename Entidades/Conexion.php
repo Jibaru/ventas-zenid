@@ -25,6 +25,8 @@ class Conexion
             $this->contrasenia, 
             $this->nombre_bd
         );
+
+        mysqli_set_charset($this->conexion, "utf8mb4");
     }
 
     protected function desconectarDB()
