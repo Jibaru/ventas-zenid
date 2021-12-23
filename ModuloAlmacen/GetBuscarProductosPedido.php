@@ -11,7 +11,7 @@ function validarBoton($boton)
 // Inicio
 $boton = isset($_GET["boton"]) ? $_GET["boton"] : null;
 $idMarca = isset($_GET["id-marca"]) ? $_GET["id-marca"] : null;
-$nombre = isset($_GET["nombre"]) ? trim($_GET["nombre"]) : null;
+$nombre = isset($_GET["nombre"]) && !empty(trim($_GET["nombre"])) ? trim($_GET["nombre"]) : null;
 
 if (validarBoton($boton) == 0) 
 {

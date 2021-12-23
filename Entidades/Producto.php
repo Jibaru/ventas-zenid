@@ -6,10 +6,26 @@ class Producto extends Conexion
     public function obtenerProductos($nombre, $idMarca)
     {
         $this->conectarDB();
-        $nombre = ($nombre ? ($nombre + '%') : '');
-        $sql = "SELECT * FROM productos
-                WHERE nombre LIKE '$nombre' OR 
-                id_marca = '$idMarca'";
+        
+        $sentencias = array();
+
+        if (!is_null($nombre))
+        {
+            array_push($sentencias, "nombre LIKE '$nombre%'");
+        }
+
+        if (!is_null($idMarca))
+        {
+            array_push($sentencias, "id_marca = '$idMarca'");
+        }
+
+        $sql = "SELECT * FROM productos";
+
+        if (!empty($sentencias)) 
+        {
+            $sql .= (" WHERE ".implode(" OR ", $sentencias)); 
+        }
+        
         $resultado = $this->conexion->query($sql);
         $numFilas = mysqli_num_rows($resultado);
         $this->desconectarDB();
@@ -24,10 +40,16 @@ class Producto extends Conexion
 
     public function obtenerProductosSimilares($termino)
     {
+        if (is_null($termino))
+        {
+            return array();
+        }
+        
         $this->conectarDB();
-        $termino = ($termino ? ($termino + '%') : '');
-        $sql = "SELECT * FROM productos
-                WHERE descripcion LIKE '$termino%'";
+        $sql = "SELECT * FROM productos 
+                WHERE 
+                    descripcion LIKE '$termino%' AND
+                    nombre NOT LIKE '$termino%'";
         $resultado = $this->conexion->query($sql);
         $numFilas = mysqli_num_rows($resultado);
         $this->desconectarDB();
