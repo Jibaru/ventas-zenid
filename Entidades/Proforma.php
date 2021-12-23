@@ -27,7 +27,18 @@ class Proforma extends Conexion
     public function obtenerProforma($idProforma)
     {
         $this->conectarDB();
-        $sql = "SELECT * FROM proformas WHERE id_proforma = '$idProforma'";
+        $sql = "SELECT 
+                    p.id_proforma,
+                    p.nombre_referencial,
+                    p.fecha_emision,
+                    p.id_usuario,
+                    up.nombre as nombre_usuario,
+                    up.ape_paterno as ape_paterno_usuario,
+                    up.ape_materno as ape_materno_usuario
+                FROM proformas as p
+                INNER JOIN usuarios as up
+                ON p.id_usuario = up.id_usuario
+                WHERE id_proforma = '$idProforma'";
         $resultado = $this->conexion->query($sql);
         $numFilas = mysqli_num_rows($resultado);
         $this->desconectarDB();

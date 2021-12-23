@@ -124,6 +124,7 @@ class ControllerEmitirProforma
                 $productoProforma["cantidad"]
             );
         }
+        unset($_SESSION["productos_proforma"]);
 
         $proforma = $eProforma->obtenerProforma($idProforma);
         $listaProductosProformados = $eProductoProformado->obtenerProductosProformados($idProforma);
@@ -131,6 +132,38 @@ class ControllerEmitirProforma
         include_once("FormVerProforma.php");
         $formulario = new FormVerProforma;
         $formulario->formVerProformaShow($proforma, $listaProductosProformados);
+    }
+
+    public function generarPDF($idProforma)
+    {
+        include_once("../Entidades/Proforma.php");
+        $eProforma = new Proforma;
+        $proforma = $eProforma->obtenerProforma($idProforma);
+
+        include_once("../Entidades/ProductoProformado.php");
+        $eProductoProformado = new ProductoProformado;
+        $listaProductosProformados = $eProductoProformado->obtenerProductosProformados($idProforma);
+        
+        ob_start();
+        require_once("FormPDFProforma.php");
+        $formulario = new FormPDFProformaPDF;
+        $formulario->formPDFProformaShow(
+            $proforma,
+            $listaProductosProformados
+        );
+        $html = ob_get_clean();
+
+        $this->mostrarPDF($html);
+    }
+
+    private function mostrarPDF($html)
+    {
+        require_once("../vendor/autoload.php");
+        $dompdf = new Dompdf\Dompdf();
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $dompdf->stream("PDF Proforma", array("Attachment" => 0));
     }
 
     private function existenciaProductos($listaProductos, $listaProductosSimilares)
