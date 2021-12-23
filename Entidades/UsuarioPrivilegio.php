@@ -21,12 +21,12 @@ class UsuarioPrivilegio extends Conexion
         $numFilas = mysqli_num_rows($resultado);
         $this->desconectarDB();
         
-        $fila = array();
+        $usuariosPrivilegios = array();
         for ($i = 0; $i < $numFilas; $i++) {
-            $fila[$i] = $resultado->fetch_array();
+            $usuariosPrivilegios[$i] = $resultado->fetch_array();
         }
             
-        return ($fila);
+        return ($usuariosPrivilegios);
     }
 
     public function crearUsuarioPrivilegio($idUsuario, $idPrivilegio)

@@ -11,6 +11,7 @@ class Privilegio extends Conexion
         $numFilas = mysqli_num_rows($resultado);
         $this->desconectarDB();
         
+        $privilegios = array();
         for ($i = 0; $i < $numFilas; $i++) {
             $privilegios[$i] = $resultado->fetch_array();
         }

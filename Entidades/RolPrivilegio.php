@@ -21,12 +21,12 @@ class RolPrivilegio extends Conexion
         $numFilas = mysqli_num_rows($resultado);
         $this->desconectarDB();
         
-
+        $rolesPrivilegios = array();
         for ($i = 0; $i < $numFilas; $i++) {
-            $fila[$i] = $resultado->fetch_array();
+            $rolesPrivilegios[$i] = $resultado->fetch_array();
         }
             
-        return ($fila);
+        return ($rolesPrivilegios);
     }
 
     public function crearRolPrivilegio($idRol, $idPrivilegio)
