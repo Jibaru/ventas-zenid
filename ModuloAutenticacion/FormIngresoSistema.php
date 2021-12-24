@@ -37,8 +37,10 @@ class FormIngresoSistema
                     <div class="text-center mt-2 mb-2">
                         <button name="boton" class="btn btn-primary">Ingresar</button>
                     </div>
+                </form>
+                <form action="./ModuloSeguridad/GetFormRecuperarContrasenia.php" method="GET">
                     <div class="text-center mt-2 mb-2">
-                        <a href="recuperar-contrasenia">Recuperar contraseña</a>
+                        <button class="btn btn-primary" name="enlace">Recuperar contraseña</button>
                     </div>
                 </form>
             </div>

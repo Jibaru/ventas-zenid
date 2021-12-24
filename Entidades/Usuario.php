@@ -19,6 +19,21 @@ class Usuario extends Conexion
         return 1;
     }
 
+    public function verificarCorreoElectronico($correoElectronico)
+    {
+        $this->conectarDB();
+        $sql = "SELECT * FROM usuarios WHERE correo_electronico = '$correoElectronico' AND habilitado = 1";
+        $resultado = $this->conexion->query($sql);
+        $numFilas = mysqli_num_rows($resultado);
+        $this->desconectarDB();
+        
+        if ($numFilas >= 1) {
+            return 1;
+        }
+
+        return 0;
+    }
+
     public function obtenerUsuario($correoElectronico)
     {
         $this->conectarDB();
