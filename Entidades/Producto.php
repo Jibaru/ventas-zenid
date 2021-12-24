@@ -62,6 +62,11 @@ class Producto extends Conexion
         return ($productos);
     }
 
+    public function obtenerProductosPorNombre($nombre)
+    {
+        return $this->obtenerProductos($nombre, null);
+    }
+
     public function obtenerProducto($idProducto)
     {
         $this->conectarDB();
@@ -91,6 +96,87 @@ class Producto extends Conexion
         }
             
         return 1;
+    }
+
+    public function crearProducto(
+        $nombre,
+        $codigoBarras,
+        $igv,
+        $precioCompraUnitario,
+        $precioVenta,
+        $stock,
+        $stockMinimo,
+        $descripcion,
+        $idMarca
+    )
+    {
+        $this->conectarDB();
+        $sql = "INSERT INTO productos(
+            nombre,
+            codigo_barras,
+            igv,
+            precio_compra_unitario,
+            precio_venta,
+            stock,
+            stock_minimo,
+            descripcion,
+            id_marca
+        ) VALUES (
+            '$nombre',
+            '$codigoBarras',
+            '$igv',
+            '$precioCompraUnitario',
+            '$precioVenta',
+            '$stock',
+            '$stockMinimo',
+            '$descripcion',
+            '$idMarca'
+        )";
+        $this->conexion->query($sql);
+        $idProducto = mysqli_insert_id($this->conexion);
+        $this->desconectarDB();
+        return $idProducto;
+    }
+
+    public function modificarProducto(
+        $idProducto,
+        $nombre,
+        $codigoBarras,
+        $igv,
+        $precioCompraUnitario,
+        $precioVenta,
+        $stock,
+        $stockMinimo,
+        $descripcion,
+        $idMarca
+    )
+    {
+        $this->conectarDB();
+        $sql = "UPDATE productos 
+            SET nombre = '$nombre',
+            codigo_barras = '$codigoBarras',
+            igv = '$igv',
+            precio_compra_unitario = '$precioCompraUnitario',
+            precio_venta = '$precioVenta',
+            stock = '$stock',
+            stock_minimo = '$stockMinimo',
+            descripcion = '$descripcion',
+            id_marca = '$idMarca'
+            WHERE id_producto = '$idProducto'
+        ";
+        print_r($sql);
+        $this->conexion->query($sql);
+        $this->desconectarDB();
+    }
+
+    public function habilitar($idProducto, $valor)
+    {
+        $this->conectarDB();
+        $sql = "UPDATE productos
+                SET habilitado = '$valor' 
+                WHERE id_producto = '$idProducto'";
+        $this->conexion->query($sql);
+        $this->desconectarDB();
     }
 }
 

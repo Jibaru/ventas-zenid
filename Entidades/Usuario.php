@@ -145,12 +145,12 @@ class Usuario extends Conexion
         $this->conectarDB();
         $sql = "UPDATE usuarios
                 SET nombre = '$nombre',
-                SET ape_paterno = '$apePaterno',
-                SET ape_materno = '$apeMaterno',
-                SET dni = '$dni',
-                SET correo_electronico = '$correoElectronico',
-                SET telefono = '$telefono',
-                SET id_rol = '$idRol'
+                ape_paterno = '$apePaterno',
+                ape_materno = '$apeMaterno',
+                dni = '$dni',
+                correo_electronico = '$correoElectronico',
+                telefono = '$telefono',
+                id_rol = '$idRol'
                 WHERE id_usuario = '$idUsuario'";
         $this->conexion->query($sql);
         $this->desconectarDB();
