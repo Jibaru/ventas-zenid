@@ -25,14 +25,14 @@ class FormNuevaContrasenia
                 <h3>Nueva contraseña</h3>
             </div>
             <div class="card-body">
-                <form action="#" method="POST">
+                <form action="PostNuevaContrasenia.php" method="POST">
                     <div class="form-group">
                         <label>Nueva contraseña</label>
                         <input type="text" name="contrasenia" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Repertir contraseña</label>
-                        <input type="text" name="repetir-contrasenia" class="form-control" required>
+                        <input type="text" name="contrasenia-repetida" class="form-control" required>
                     </div>
                     <div class="text-center mt-2 mb-2">
                         <button name="boton" class="btn btn-primary">

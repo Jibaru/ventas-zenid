@@ -40,6 +40,21 @@ class ControllerRecuperarContrasenia
         }
     }
 
+    public function crearNuevaContrasenia($contrasenia)
+    {
+        $correoElectronico = $this->obtenerCorreoElectronicoGuardado();
+        include_once("../Entidades/Usuario.php");
+        $eUsuario = new Usuario;
+        $eUsuario->actualizarContrasenia($correoElectronico, $contrasenia);
+
+        include_once("../Shared/FormMensajeSistema.php");
+        $formulario = new FormMensajeSistema;
+        $formulario->formMensajeSistemaRutaShow(
+            "Datos actualizados",
+            "../index.php"
+        );
+    }
+
     private function validarCodigoRecuperacionEnviado($codigoRecuperacion)
     {
         if (session_status() === PHP_SESSION_NONE) {
@@ -71,6 +86,15 @@ class ControllerRecuperarContrasenia
 
         $_SESSION["codigo_recuperacion"] = $codigoRecuperacion;
         $_SESSION["correo_electronico_recuperacion"] = $correoElectronico;
+    }
+
+    private function obtenerCorreoElectronicoGuardado()
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        return $_SESSION["correo_electronico_recuperacion"];
     }
 }
 

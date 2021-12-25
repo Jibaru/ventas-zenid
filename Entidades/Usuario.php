@@ -181,6 +181,16 @@ class Usuario extends Conexion
         $this->desconectarDB();
     }
 
+    public function actualizarContrasenia($correoElectronico, $contrasenia)
+    {
+        $this->conectarDB();
+        $sql = "UPDATE usuarios
+                SET contrasenia = '$contrasenia'
+                WHERE correo_electronico = '$correoElectronico'";
+        $this->conexion->query($sql);
+        $this->desconectarDB();
+    }
+
 }
 
 ?>
