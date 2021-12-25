@@ -5,14 +5,22 @@ class Usuario extends Conexion
 {
 
     public function validarUsuario($correoElectronico, $contrasenia)
-    {
+    {   
         $this->conectarDB();
-        $sql = "SELECT * FROM usuarios WHERE correo_electronico = '$correoElectronico' AND contrasenia = '$contrasenia' AND habilitado = 1";
+        $sql = "SELECT * FROM usuarios WHERE correo_electronico = '$correoElectronico' AND habilitado = 1";
         $resultado = $this->conexion->query($sql);
         $numFilas = mysqli_num_rows($resultado);
         $this->desconectarDB();
         
         if ($numFilas != 1) {
+            return 0;
+        }
+
+        require_once("../vendor/autoload.php");
+        $bcrypt = new Bcrypt\Bcrypt();
+        $usuario = $resultado->fetch_array();
+        if (!$bcrypt->verify($contrasenia, $usuario["contrasenia"]))
+        {
             return 0;
         }
 
@@ -102,6 +110,9 @@ class Usuario extends Conexion
         $idRol)
     {
         $this->conectarDB();
+        require_once("../vendor/autoload.php");
+        $bcrypt = new Bcrypt\Bcrypt();
+        $encriptado = $bcrypt->encrypt($contrasenia);
         $sql = "INSERT INTO usuarios(
             nombre,
             ape_paterno,
@@ -118,7 +129,7 @@ class Usuario extends Conexion
             '$dni',
             '$correoElectronico',
             '$telefono',
-            '$contrasenia',
+            '$encriptado',
             '$idRol'
         )";
         $this->conexion->query($sql);
@@ -184,8 +195,11 @@ class Usuario extends Conexion
     public function actualizarContrasenia($correoElectronico, $contrasenia)
     {
         $this->conectarDB();
+        require_once("../vendor/autoload.php");
+        $bcrypt = new Bcrypt\Bcrypt();
+        $encriptado = $bcrypt->encrypt($contrasenia);
         $sql = "UPDATE usuarios
-                SET contrasenia = '$contrasenia'
+                SET contrasenia = '$encriptado'
                 WHERE correo_electronico = '$correoElectronico'";
         $this->conexion->query($sql);
         $this->desconectarDB();
