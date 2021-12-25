@@ -50,8 +50,8 @@ else
     }
     else 
     {
-        include_once("ControllerEncargadoFinanzas.php");
-        $controller = new ControllerEncargadoFinanzas;
+        include_once("ControllerGestionarProveedores.php");
+        $controller = new ControllerGestionarProveedores;
         $controller->nuevoProveedor(
             $nombre, 
             $correoElectronico, 

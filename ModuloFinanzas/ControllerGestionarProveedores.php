@@ -1,6 +1,6 @@
 <?php
 
-class ControllerEncargadoFinanzas
+class ControllerGestionarProveedores
 {
     public function nuevoProveedor(
         $nombre, 
