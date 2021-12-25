@@ -15,15 +15,15 @@ class CorreoElectronicoSender
         $env = getenv();
 
         //Server settings
-        $this->mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-        $this->mail->isSMTP();                                            //Send using SMTP
-        $this->mail->Host       = $env["ZENID_MAIL_HOST"];                     //Set the SMTP server to send through
-        $this->mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $this->mail->Username   = $env["ZENID_MAIL_USERNAME"];                     //SMTP username
-        $this->mail->Password   = $env["ZENID_MAIL_PASSWORD"];                               //SMTP password
-        $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-        $this->mail->Port       = 465; 
-        $this->mail->SMTPDebug  = 0;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        $this->mail->SMTPDebug = SMTP::DEBUG_OFF;               //Enable verbose debug output
+        $this->mail->isSMTP();                                  //Send using SMTP
+        $this->mail->Host       = $env["ZENID_MAIL_HOST"];      //Set the SMTP server to send through
+        $this->mail->SMTPAuth   = true;                         //Enable SMTP authentication
+        $this->mail->Username   = $env["ZENID_MAIL_USERNAME"];  //SMTP username
+        $this->mail->Password   = $env["ZENID_MAIL_PASSWORD"];  //SMTP password
+        $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;  //Enable implicit TLS encryption
+        $this->mail->Port       = 465;                          //TCP port to connect to; use 587 if you have set 
+                                                                // `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
     }
 
     public function enviar($correoElectronico, $asunto, $mensaje)
@@ -38,7 +38,7 @@ class CorreoElectronicoSender
             $this->mail->addAddress($correoElectronico, $correoElectronico);
 
             //Content
-            $this->mail->isHTML(true);                                  //Set email format to HTML
+            $this->mail->isHTML(true);
             $this->mail->Subject = $asunto;
             $this->mail->Body    = $mensaje;
             $this->mail->AltBody = $mensaje;
