@@ -91,6 +91,22 @@ class Proveedor extends Conexion
         $this->conexion->query($sql);
         $this->desconectarDB();
     }
+
+    public function obtenerProveedoresHabilitados()
+    {
+        $this->conectarDB();
+        $sql = "SELECT * FROM proveedores WHERE habilitado = '1'";
+        $resultado = $this->conexion->query($sql);
+        $numFilas = mysqli_num_rows($resultado);
+        $this->desconectarDB();
+        
+        $proveedores = array();
+        for ($i = 0; $i < $numFilas; $i++) {
+            $proveedores[$i] = $resultado->fetch_array();
+        }
+        
+        return ($proveedores);
+    }
 }
 
 ?>
