@@ -32,11 +32,29 @@ class ControllerIngresarSistema
             $eUsuarioPrivilegio = new UsuarioPrivilegio;
             $usuarioPrivilegios = $eUsuarioPrivilegio->obtenerPrivilegios($idUsuario);
 
+            $privilegios = array();
+            $idsPrivilegios = array();
+
+            foreach ($rolPrivilegios as $privilegio) 
+            {
+                array_push($privilegios, $privilegio);
+                array_push($idsPrivilegios, $privilegio["id_privilegio"]);
+            }
+            
+            foreach ($usuarioPrivilegios as $privilegio)
+            {
+                if (!in_array($privilegio["id_privilegio"], $idsPrivilegios))
+                {
+                    array_push($privilegios, $privilegio);
+                }
+            }
+
             $datos = array(
                 "usuario" => $usuario,
                 "rol" => $rol,
                 "rol_privilegios" => $rolPrivilegios,
-                "usuario_privilegios" => $usuarioPrivilegios
+                "usuario_privilegios" => $usuarioPrivilegios,
+                "privilegios" => $privilegios
             );
 
             $this->guardarSesion($datos);

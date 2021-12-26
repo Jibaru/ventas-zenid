@@ -29,7 +29,7 @@
     </style>
     <ul>
         <?php
-            foreach ($_SESSION["autenticado"]["rol_privilegios"] as $privilegio) {
+            foreach ($_SESSION["autenticado"]["privilegios"] as $privilegio) {
         ?>
         <li>
             <a href="<?php echo $privilegio["path"]?>">
