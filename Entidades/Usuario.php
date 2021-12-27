@@ -141,9 +141,21 @@ class Usuario extends Conexion
     public function obtenerUsuarios($nombre, $dni)
     {
 
-        $sql = "SELECT * FROM usuarios 
-                WHERE nombre LIKE '$nombre%' AND
-                dni LIKE '$dni%'";
+        $sql = "SELECT 
+                    u.id_usuario,
+                    u.nombre,
+                    u.ape_paterno,
+                    u.ape_materno,
+                    u.dni,
+                    u.telefono,
+                    u.correo_electronico,
+                    u.habilitado,
+                    r.nombre as nombre_rol
+                FROM usuarios as u 
+                INNER JOIN roles as r
+                ON u.id_rol = r.id_rol
+                WHERE u.nombre LIKE '$nombre%' AND
+                u.dni LIKE '$dni%'";
 
         $this->conectarDB();
         $resultado = $this->conexion->query($sql);

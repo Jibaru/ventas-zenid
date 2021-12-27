@@ -49,10 +49,11 @@ class FormGestionarUsuarios
                             <thead class="table-dark">
                                 <tr>
                                     <th>Id</th>
-                                    <th>Nombre</th>
+                                    <th>Nombre y Apellidos</th>
                                     <th>Correo Electrónico</th>
                                     <th>DNI</th>
                                     <th>Teléfono</th>
+                                    <th>Rol</th>
                                     <th class="text-end">
                                         <form action="GetFormNuevoUsuario.php" method="POST">
                                             <button name="boton" class="btn btn-primary">
@@ -66,10 +67,19 @@ class FormGestionarUsuarios
                                 <?php foreach($listaUsuarios as $usuario) { ?>
                                 <tr>
                                     <td><?php echo $usuario["id_usuario"] ?></td>
-                                    <td><?php echo $usuario["nombre"] ?></td>
+                                    <td>
+                                        <?php echo $usuario["nombre"] ?>
+                                        <?php echo $usuario["ape_paterno"] ?>
+                                        <?php echo $usuario["ape_materno"] ?>
+                                    </td>
                                     <td><?php echo $usuario["correo_electronico"] ?></td>
                                     <td><?php echo $usuario["dni"] ?></td>
                                     <td><?php echo $usuario["telefono"] ?></td>
+                                    <td>
+                                        <span class="badge bg-info">
+                                            <?php echo $usuario["nombre_rol"] ?>
+                                        </span>
+                                    </td>
                                     <td class="text-end">
                                         <form action="GetFormEditarUsuario.php" method="GET" class="d-inline">
                                             <input type="hidden" name="id-usuario"
