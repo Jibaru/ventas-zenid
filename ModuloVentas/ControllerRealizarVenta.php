@@ -45,7 +45,7 @@ class ControllerRealizarVenta
 
     public function validarRuc($ruc)
     {
-        include_once("../utils/Sunat.php");
+        include_once("../Shared/Sunat.php");
         $sunat = new Sunat();
         echo json_encode($sunat->validarRuc($ruc));
     }
