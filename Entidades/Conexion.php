@@ -13,8 +13,8 @@ class Conexion
         $env = getenv();
         $this->host = $env["ZENID_ADS_HOST"];
         $this->nombre_bd = $env["ZENID_ADS_BD_NAME"];
-        $this->usuario = $env["ZENID_SCRUM_BD_USER"];
-        $this->contrasenia = $env["ZENID_SCRUM_BD_PASSWORD"];
+        $this->usuario = $env["ZENID_ADS_BD_USER"];
+        $this->contrasenia = $env["ZENID_ADS_BD_PASSWORD"];
     }
 
     protected function conectarDB()
