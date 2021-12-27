@@ -62,7 +62,32 @@ class ControllerRealizarVenta
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
+
+        include_once("../Entidades/ProductoProformado.php");
+        $eProductoProformado = new ProductoProformado;
+        $listaProductosProformados = $eProductoProformado->obtenerProductosProformados($idProforma);
         
+        include_once("../Entidades/Producto.php");
+        $eProducto = new Producto;
+        $totalVenta = 0;
+        $totalCompra = 0;
+        $unidades = 0;
+        foreach ($listaProductosProformados as $productoProformado)
+        {
+            $unidades += $productoProformado["cantidad"];
+
+            $precio = $productoProformado["precio_venta"] * $productoProformado["cantidad"];
+            $igv = $productoProformado["igv"] * $precio;
+            $totalVenta += ($precio + $igv);
+            
+            $totalCompra += ($productoProformado["precio_compra_unitario"] * $productoProformado["cantidad"]); 
+            
+            $eProducto->reducirStock(
+                $productoProformado["id_producto"], 
+                $productoProformado["cantidad"]
+            );
+        }
+
         include_once("../Entidades/Venta.php");
         $eVenta = new Venta;
         $idVenta = $eVenta->crearVenta(
@@ -70,6 +95,9 @@ class ControllerRealizarVenta
             $nombres,
             $apePaterno,
             $apeMaterno,
+            $totalVenta,
+            $totalCompra,
+            $unidades,
             date("Y:m:d H:i:s"),
             $_SESSION["autenticado"]["usuario"]["id_usuario"]
         );
@@ -92,20 +120,6 @@ class ControllerRealizarVenta
                 $comprobante,
                 date("Y:m:d H:i:s"),
                 $idVenta
-            );
-        }
-
-        include_once("../Entidades/ProductoProformado.php");
-        $eProductoProformado = new ProductoProformado;
-        $listaProductosProformados = $eProductoProformado->obtenerProductosProformados($idProforma);
-        
-        include_once("../Entidades/Producto.php");
-        $eProducto = new Producto;
-        foreach ($listaProductosProformados as $productoProformado)
-        {
-            $eProducto->reducirStock(
-                $productoProformado["id_producto"], 
-                $productoProformado["cantidad"]
             );
         }
 
