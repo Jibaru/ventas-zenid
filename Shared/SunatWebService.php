@@ -1,6 +1,6 @@
 <?php
 
-class Sunat
+class SunatWebService
 {
     private $url;
     private $token;

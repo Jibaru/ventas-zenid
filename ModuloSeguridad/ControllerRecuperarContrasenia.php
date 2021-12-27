@@ -80,9 +80,9 @@ class ControllerRecuperarContrasenia
         $asunto = "Código de Recuperación ZENID";
         $mensaje = "Use el siguiente código de recuperación: ".$codigoRecuperacion;
 
-        require_once("../Shared/CorreoElectronicoSender.php");
-        $correoElectronicoSender = new CorreoElectronicoSender;
-        $correoElectronicoSender->enviar($correoElectronico, $asunto, $mensaje);
+        require_once("../Shared/CorreoElectronicoSMTP.php");
+        $correoElectronicoSMTP = new CorreoElectronicoSMTP;
+        $correoElectronicoSMTP->enviar($correoElectronico, $asunto, $mensaje);
 
         $_SESSION["codigo_recuperacion"] = $codigoRecuperacion;
         $_SESSION["correo_electronico_recuperacion"] = $correoElectronico;
