@@ -29,7 +29,7 @@ class CorreoElectronicoSender
     public function enviar($correoElectronico, $asunto, $mensaje)
     {
         $env = getenv();
-        $remitente = $env["ZENID_MAIL_USERNAME"];
+        $remitente = $env["ZENID_ADS_MAIL_USERNAME"];
 
         try {
              
