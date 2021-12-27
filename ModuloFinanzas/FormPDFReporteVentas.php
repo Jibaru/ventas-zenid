@@ -10,6 +10,10 @@ class FormPDFReporteVentas
         $totalUnidades = 0;
         $totalVenta = 0;
         $totalCompra = 0;
+        $path = "../assets/img/logo.png";
+        $tipo = pathinfo($path, PATHINFO_EXTENSION);
+        $datos = file_get_contents($path);
+        $base64 = 'data:image/' . $tipo . ';base64,' . base64_encode($datos);
         ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -18,7 +22,7 @@ class FormPDFReporteVentas
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generar Reporte Ventas</title>
+    <title>PDF Reporte Ventas</title>
     <?php include_once("../layout/Estilos.php"); ?>
 </head>
 
@@ -53,6 +57,9 @@ class FormPDFReporteVentas
         <header>
             <?php echo date("d-m-Y"); ?>
         </header>
+        <div class="text-end">
+            <img src="<?php echo $base64?>" height="80" />
+        </div>
         <h1>Reporte de Ventas</h1>
         <hr>
         <?php if (!empty($_GET["fecha-inicio"])) { ?>

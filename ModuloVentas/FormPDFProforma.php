@@ -4,7 +4,10 @@ class FormPDFProforma
 {
     public function formPDFProformaShow($proforma, $listaProductosProformados)
     {
-        
+        $path = "../assets/img/logo.png";
+        $tipo = pathinfo($path, PATHINFO_EXTENSION);
+        $datos = file_get_contents($path);
+        $base64 = 'data:image/' . $tipo . ';base64,' . base64_encode($datos);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -41,6 +44,9 @@ class FormPDFProforma
         <header>
             <?php echo $proforma["fecha_emision"]; ?>
         </header>
+        <div class="text-end">
+            <img src="<?php echo $base64?>" height="80" />
+        </div>
         <h1>Proforma Nº <?php echo $proforma["id_proforma"]; ?></h1>
         <hr>
         <div>
