@@ -1,13 +1,13 @@
 <?php
 
-class FormVerVenta
+class FormProformaSeleccionada
 {
-    public function formVerVentaShow(
-        $venta,
+    public function formProformaSeleccionadaShow(
+        $proforma, 
         $listaProductosProformados
     )
     {
-if (session_status() === PHP_SESSION_NONE) {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 ?>
@@ -18,7 +18,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ver Venta</title>
+    <title>Proforma Seleccionada</title>
     <?php include_once("../layout/Estilos.php"); ?>
 </head>
 
@@ -27,80 +27,71 @@ if (session_status() === PHP_SESSION_NONE) {
         <?php include_once("../layout/BarraNavegacion.php"); ?>
         <?php include_once("../layout/BarraLateral.php"); ?>
         <section id="main">
-            <h1>Ver venta</h1>
+            <h1>Proforma Seleccionada</h1>
+            <div class="card">
+                <div class="card-body">
+                    <form action="PostGenerarVenta.php" method="POST" class="row">
+                        <input type="hidden" name="id-proforma" value="<?php echo $proforma["id_proforma"]; ?>" />
+                        <div class="form-group col-md-3">
+                            <label>Nombres</label>
+                            <input type="text" name="nombres" class="form-control" required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Apellido Paterno</label>
+                            <input type="text" name="ape-paterno" class="form-control" required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Apellido Materno</label>
+                            <input type="text" name="ape-materno" class="form-control" required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <input type="radio" name="tipo-comprobante" value="boleta" required class="form-check-input"
+                                checked>
+                            <label>Boleta</label>
+                            <input id="chk-factura" type="radio" name="tipo-comprobante" value="factura"
+                                class="form-check-input" required>
+                            <label>Factura</label>
+                            <input id="comprobante" type="number" name="comprobante" class="form-control"
+                                placeholder="Nº DNI" class="form-control" required>
+                            <span id="nombre-empresa" class="mt-1 alert"></span>
+                            <button id="btn-validar-ruc" type="button" name="boton"
+                                class="btn btn-warning w-100 mt-1">Validar
+                                RUC</button>
+                        </div>
+                        <div class="form-group mt-2 d-flex justify-content-center">
+                            <button id="btn-generar-venta" name="boton" class="btn btn-primary">
+                                Generar Venta
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <h3 class="mt-3 mb-3">Proforma</h3>
             <div class="card">
                 <div class="card-body row">
                     <p class="col-md-2">
-                        <strong>Venta Nº:</strong>
+                        <strong>Nombre Referencial:</strong>
                     </p>
                     <p class="col-md-10">
-                        <?php echo str_pad($venta["id_venta"], 7, "0", STR_PAD_LEFT); ?>
-                    </p>
-                    <p class="col-md-2">
-                        <strong>
-                            <?php 
-                            if (is_null($venta["id_boleta"])) { 
-                                echo "Factura Nº:";
-                            } else {
-                                echo "Boleta Nº:";
-                            }    
-                            ?>
-                        </strong>
-                    </p>
-                    <p class="col-md-10">
-                        <?php 
-                        if (is_null($venta["id_boleta"])) { 
-                            echo str_pad($venta["id_factura"], 7, "0", STR_PAD_LEFT);
-                        } else {
-                            echo str_pad($venta["id_boleta"], 7, "0", STR_PAD_LEFT);
-                        }   
-                        ?>
-                    </p>
-                    <p class="col-md-2">
-                        <strong>Señor(es):</strong>
-                    </p>
-                    <p class="col-md-10">
-                        <?php echo $venta["nombres"]; ?>
-                        <?php echo $venta["ape_paterno"]; ?>
-                        <?php echo $venta["ape_materno"]; ?>
+                        <?php echo $proforma["nombre_referencial"]; ?>
                     </p>
                     <p class="col-md-2">
                         <strong>Fecha Emisión:</strong>
                     </p>
                     <p class="col-md-10">
-                        <?php echo $venta["fecha_emision"]; ?>
+                        <?php echo $proforma["fecha_emision"]; ?>
                     </p>
                     <p class="col-md-2">
-                        <strong>
-                            <?php 
-                            if (is_null($venta["id_boleta"])) { 
-                                echo "RUC:";
-                            } else {
-                                echo "DNI:";
-                            }    
-                            ?>
-                        </strong>
+                        <strong>Realizado por:</strong>
                     </p>
                     <p class="col-md-10">
-                        <?php 
-                        if (is_null($venta["id_boleta"])) { 
-                            echo $venta["ruc"];
-                        } else {
-                            echo $venta["dni"];
-                        }   
-                        ?>
-                    </p>
-                    <p class="col-md-2">
-                        <strong>Vendido Por:</strong>
-                    </p>
-                    <p class="col-md-10">
-                        <?php echo $venta["nombre_usuario_venta"]; ?>
-                        <?php echo $venta["ape_paterno_usuario_venta"]; ?>
-                        <?php echo $venta["ape_materno_usuario_venta"]; ?>
+                        <?php echo $proforma["nombre_usuario"]; ?>
+                        <?php echo $proforma["ape_paterno_usuario"]; ?>
+                        <?php echo $proforma["ape_materno_usuario"]; ?>
                     </p>
                 </div>
             </div>
-            <h3 class="mt-3 mb-3">Productos vendidos</h3>
+            <h3 class="mt-3 mb-3">Productos proformados</h3>
             <div class="card">
                 <div class="card-body">
                     <table class="table">
@@ -183,18 +174,11 @@ if (session_status() === PHP_SESSION_NONE) {
                         </tbody>
                     </table>
                 </div>
-                <form action="GetPDFVenta.php" method="GET">
-                    <input type="hidden" name="id-venta" value="<?php echo $venta["id_venta"]; ?>" />
-                    <div class="card-footer text-center">
-                        <button name="boton" class="btn btn-primary">
-                            Imprimir
-                        </button>
-                    </div>
-                </form>
             </div>
         </section>
     </main>
     <?php include_once("../layout/Scripts.php"); ?>
+    <script src="../assets/js/ModuloVentas/FormProformaSeleccionada.js"></script>
 </body>
 
 </html>

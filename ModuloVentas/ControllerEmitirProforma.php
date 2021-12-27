@@ -146,7 +146,7 @@ class ControllerEmitirProforma
         
         ob_start();
         require_once("FormPDFProforma.php");
-        $formulario = new FormPDFProformaPDF;
+        $formulario = new FormPDFProforma;
         $formulario->formPDFProformaShow(
             $proforma,
             $listaProductosProformados

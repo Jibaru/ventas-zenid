@@ -47,6 +47,37 @@ class Proforma extends Conexion
             
         return ($fila);
     }
+
+    public function obtenerProformas($valor)
+    {
+        $this->conectarDB();
+        $sql = "SELECT 
+                    p.id_proforma,
+                    p.nombre_referencial,
+                    p.fecha_emision,
+                    u.id_usuario,
+                    u.nombre as nombre_usuario,
+                    u.ape_paterno as ape_paterno_usuario,
+                    u.ape_materno as ape_materno_usuario,
+                    v.id_venta
+                 FROM proformas as p 
+                 LEFT JOIN usuarios as u
+                 ON p.id_usuario = u.id_usuario
+                 LEFT JOIN ventas as v
+                 ON p.id_proforma = v.id_proforma
+                 WHERE p.id_proforma = '$valor' OR
+                 p.nombre_referencial LIKE '$valor%'";
+        $resultado = $this->conexion->query($sql);
+        $numFilas = mysqli_num_rows($resultado);
+        $this->desconectarDB();
+        
+        $proformas = array();
+        for ($i = 0; $i < $numFilas; $i++) {
+            $proformas[$i] = $resultado->fetch_array();
+        }
+            
+        return ($proformas);
+    }
 }
 
 ?>

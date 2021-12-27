@@ -178,6 +178,16 @@ class Producto extends Conexion
         $this->conexion->query($sql);
         $this->desconectarDB();
     }
+
+    public function reducirStock($idProducto, $cantidad)
+    {
+        $this->conectarDB();
+        $sql = "UPDATE productos
+                SET stock = stock - '$cantidad' 
+                WHERE id_producto = '$idProducto'";
+        $this->conexion->query($sql);
+        $this->desconectarDB();
+    }
 }
 
 ?>

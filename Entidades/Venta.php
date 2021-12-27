@@ -3,6 +3,37 @@ include_once("Conexion.php");
 
 class Venta extends Conexion
 {
+    public function crearVenta(
+        $idProforma,
+        $nombres,
+        $apePaterno,
+        $apeMaterno,
+        $fechaEmision,
+        $idUsuarioVenta
+    )
+    {
+        $this->conectarDB();
+        $sql = "INSERT INTO ventas(
+                nombres,
+                ape_paterno,
+                ape_materno,
+                fecha_emision,
+                id_usuario_venta,
+                id_proforma
+            ) VALUES (
+                '$nombres',
+                '$apePaterno',
+                '$apeMaterno',
+                '$fechaEmision',
+                '$idUsuarioVenta',
+                '$idProforma'
+            )";
+        $this->conexion->query($sql);
+        $idVenta = mysqli_insert_id($this->conexion);
+        $this->desconectarDB();
+        return $idVenta;
+    }
+    
     public function obtenerVentas($idVenta, $boleta, $factura)
     {
         $this->conectarDB();

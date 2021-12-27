@@ -32,17 +32,13 @@ class ControllerGestionarDespacho
         $eVenta = new Venta;
         $venta = $eVenta->obtenerVenta($idVenta);
 
-        include_once("../Entidades/Proforma.php");
-        $eProforma = new Proforma;
-        $proforma = $eProforma->obtenerProforma($venta["id_proforma"]);
-
         include_once("../Entidades/ProductoProformado.php");
         $eProductoProformado = new ProductoProformado;
         $listaProductosProformados = $eProductoProformado->obtenerProductosProformados($venta["id_proforma"]);
         
         include_once("FormVerVenta.php");
         $formulario = new FormVerVenta;
-        $formulario->formVerVentaShow($venta, $proforma, $listaProductosProformados);
+        $formulario->formVerVentaShow($venta, $listaProductosProformados);
     }
 
     public function despacharVenta($idVenta)
