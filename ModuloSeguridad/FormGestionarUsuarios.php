@@ -55,7 +55,7 @@ class FormGestionarUsuarios
                                     <th>Teléfono</th>
                                     <th>Rol</th>
                                     <th class="text-end">
-                                        <form action="GetFormNuevoUsuario.php" method="POST">
+                                        <form action="GetFormNuevoUsuario.php" method="GET">
                                             <button name="boton" class="btn btn-primary">
                                                 Nuevo
                                             </button>

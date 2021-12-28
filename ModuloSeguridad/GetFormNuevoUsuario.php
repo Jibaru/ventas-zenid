@@ -10,7 +10,7 @@ function validarBoton($boton)
 }
 
 // Inicio
-$boton = $_POST["boton"];
+$boton = $_GET["boton"];
 
 if (validarBoton($boton) == 0) 
 {
