@@ -71,19 +71,20 @@ class FormListaPedidosAlmacen
                                         <?php } ?>
                                     </td>
                                     <td class="text-center">
-                                        <form action="GetFormAprobarPedido.php" method="GET" class="d-inline">
-                                            <input type="hidden" name="id-pedido-almacen"
-                                                value="<?php echo $pedidoAlmacen["id_pedido_almacen"] ?>">
-                                            <button name="boton" class="btn btn-warning">
-                                                Aprobar
-                                            </button>
-                                        </form>
                                         <?php if (!is_null($pedidoAlmacen["fecha_aprobacion"])) { ?>
                                         <form action="GetFormPedidoFinanzas.php" method="GET" class="d-inline">
                                             <input type="hidden" name="id-pedido"
                                                 value="<?php echo $pedidoAlmacen["id_pedido_almacen"] ?>">
                                             <button name="boton" class="btn btn-success">
                                                 Ver Pedido Aprobado
+                                            </button>
+                                        </form>
+                                        <?php } else { ?>
+                                        <form action="GetFormAprobarPedido.php" method="GET" class="d-inline">
+                                            <input type="hidden" name="id-pedido-almacen"
+                                                value="<?php echo $pedidoAlmacen["id_pedido_almacen"] ?>">
+                                            <button name="boton" class="btn btn-warning">
+                                                Aprobar
                                             </button>
                                         </form>
                                         <?php } ?>
