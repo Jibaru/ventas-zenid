@@ -164,7 +164,6 @@ class Producto extends Conexion
             id_marca = '$idMarca'
             WHERE id_producto = '$idProducto'
         ";
-        print_r($sql);
         $this->conexion->query($sql);
         $this->desconectarDB();
     }
