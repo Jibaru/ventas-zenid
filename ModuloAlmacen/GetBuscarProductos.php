@@ -10,7 +10,7 @@ function validarBoton($boton)
 
 function validarCampos($nombre)
 {
-    if (empty($nombre))
+    if (!empty($nombre))
 		return(1);
 	else
 		return(0);
