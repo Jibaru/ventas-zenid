@@ -8,8 +8,8 @@ class SunatWebService
     public function __construct()
     {
         $env = getenv();
-        $this->url = $env["ZENID_ADS_URL_RUC"];      //"https://dniruc.apisperu.com/api/v1/ruc/";
-        $this->token = $env["ZENID_ADS_TOKEN_RUC"]; //"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImlnbmFjaW9ydWVkYWJvYWRhQGdtYWlsLmNvbSJ9.PEtcuSdcO3NvRlhSOe2br5jQHiIr99IIO4SNxH1syRM";
+        $this->url = $env["ZENID_ADS_URL_RUC"];
+        $this->token = $env["ZENID_ADS_TOKEN_RUC"];
     }
 
     public function validarRuc($ruc)
