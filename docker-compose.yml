@@ -6,7 +6,7 @@ services:
     volumes:
       - .:/app/public
     ports:
-      - "8091:80"
+      - "${ZENID_ADS_HOST}:80"
     environment:
       - ZENID_ADS_HOST=${ZENID_ADS_HOST}
       - ZENID_ADS_BD_HOST=${ZENID_ADS_BD_HOST}
