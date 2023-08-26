@@ -11,7 +11,7 @@ class Conexion
     public function __construct()
     {
         $env = getenv();
-        $this->host = $env["ZENID_ADS_HOST"];
+        $this->host = $env["ZENID_ADS_BD_HOST"];
         $this->nombre_bd = $env["ZENID_ADS_BD_NAME"];
         $this->usuario = $env["ZENID_ADS_BD_USER"];
         $this->contrasenia = $env["ZENID_ADS_BD_PASSWORD"];
